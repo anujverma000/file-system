@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FileType } from '../../rootFiles';
 import deleteIcon from '../../icons/delete.svg';
 import icon from '../../icons/folder.svg';
-import { NameEditor } from '..';
+import { DeleteConfirmation, NameEditor } from '..';
 
 export interface FolderProps {
   file: FileType
@@ -49,9 +49,13 @@ const Name = styled.div`
 `;
 
 const Folder = ({file, openFolder, deleteFile, updateFileName, setFileNameEditMode} : FolderProps) => {
+  const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState<boolean>(false)
+  const toggleDeleteConfirmation = () => setDeleteConfirmationVisible(!deleteConfirmationVisible)
+
   return (
     <FolderContainer>
-      <DeleteIcon src={deleteIcon} alt="delete" onClick={() => deleteFile(file)}/>
+      <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
+      {deleteConfirmationVisible && <DeleteConfirmation file={file} deleteFile={deleteFile} onClose={toggleDeleteConfirmation} />}
       <img src={icon} alt="folder" onDoubleClick={() => openFolder(file)}/>
       {file.isEditingName ? <NameEditor file={file} updateName={updateFileName}/> : <Name onClick={() => setFileNameEditMode(file)}>{file.name}</Name>}
     </FolderContainer>

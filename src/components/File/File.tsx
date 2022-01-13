@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { NameEditor } from '..';
+import { DeleteConfirmation, NameEditor } from '..';
 import deleteIcon from '../../icons/delete.svg';
 import icon from '../../icons/file.svg';
 import { FileType } from '../../rootFiles';
@@ -50,9 +50,13 @@ const Name = styled.div`
 
 
 const File = ({file, deleteFile, updateFileName, setFileNameEditMode} : FileProps) => {
+  const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState<boolean>(false)
+  const toggleDeleteConfirmation = () => setDeleteConfirmationVisible(!deleteConfirmationVisible)
+
   return (
     <FileContainer>
-      <DeleteIcon src={deleteIcon} alt="delete" onClick={() => deleteFile(file)}/>
+      <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
+      {deleteConfirmationVisible && <DeleteConfirmation file={file} deleteFile={deleteFile} onClose={toggleDeleteConfirmation} />}
       <img src={icon} alt="file" />
       {file.isEditingName ? <NameEditor file={file} updateName={updateFileName}/> : <Name onClick={() => setFileNameEditMode(file)}>{file.name}</Name>}
     </FileContainer>

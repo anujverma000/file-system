@@ -14,10 +14,11 @@ const Backdrop = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.68);
   background-size: 100% 100%;
+  z-index: 1;
 `;
 
 const Body = styled.div`
-  position: absolute;
+  position: fixed;
   right: 50%;
   top: 50%;
   transform: translate(50%,-50%);
@@ -25,13 +26,12 @@ const Body = styled.div`
   padding: 24px;
   min-height: 70px;
   width: 400px;
-  box-shadow: 0px 0px 2px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 14px 0px #00000080;
   border-radius: 10px;
   z-index: 2;
-  max-width: 90%;
   white-space: pre-wrap;
   font-size: 16px;
-  line-height: 32px;
+  z-index: 2;
 `;
 
 const Modal = ({ onClose, children }: ModalProps) => {
