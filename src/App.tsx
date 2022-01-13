@@ -25,7 +25,7 @@ const App = () => {
    */
 
   const addNewFolder = () => {
-    const counter = files.filter(file => !file.isFolder).length + 1
+    const counter = files.filter(file => file.isFolder).length + 1
     const newFolder: FileType = {
       name: `New Folder ${counter}`,
       parent: currentFolder,
