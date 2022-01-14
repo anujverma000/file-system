@@ -8,6 +8,10 @@ const Main = styled.main`
   padding: 42px;
   width: 50%;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 const App = () => {

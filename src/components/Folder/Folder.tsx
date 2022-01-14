@@ -56,7 +56,7 @@ const Folder = ({file, openFolder, deleteFile, updateFileName, setFileNameEditMo
     <FolderContainer>
       <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
       {deleteConfirmationVisible && <DeleteConfirmation file={file} deleteFile={deleteFile} onClose={toggleDeleteConfirmation} />}
-      <img src={icon} alt="folder" onDoubleClick={() => openFolder(file)}/>
+      <img src={icon} alt="folder" onClick={() => openFolder(file)}/>
       {file.isEditingName ? <NameEditor file={file} updateName={updateFileName}/> : <Name onClick={() => setFileNameEditMode(file)}>{file.name}</Name>}
     </FolderContainer>
   )

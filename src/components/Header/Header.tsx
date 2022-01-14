@@ -15,15 +15,22 @@ const Back = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 
 const Container = styled.header`
   display: flex;
   background: #fef5f7;
-  padding: 14px;
+  padding: 12px;
   border-radius: 12px 12px 0 0;
   border: 1px solid #dedede;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    border-radius: 0;
+    flex-direction: column;
+  }
 `;
 
 const CurrentFolderName = styled.span`
@@ -34,6 +41,9 @@ const CurrentFolderName = styled.span`
 
 const Actions = styled.div`
   display: flex;
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+  }
 `;
 
 const Action = styled.button`

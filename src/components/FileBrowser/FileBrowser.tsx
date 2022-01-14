@@ -20,6 +20,11 @@ const Container = styled.div`
   border-top: none;
   box-shadow: 0px 24px 16px 4px #bdbdbd;
   transition: all .2s;
+  @media (max-width: 768px) {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
 `;
 
 const NoFilesWrapper = styled.div`
