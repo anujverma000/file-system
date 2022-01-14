@@ -35,9 +35,16 @@ const App = () => {
    */
 
   const addNewFolder = () => {
-    const counter = files.filter(file => file.isFolder).length
+    const countOfFolders = files.filter(file => file.isFolder).length
+    let counter = 1;
+    let newName = `${NEW_FOLDER_PREFIX} ${countOfFolders + counter}`
+    const nameAlreadyExist = files.filter(f => f.isFolder && f.name === newName).length > 0;
+    if(nameAlreadyExist) {
+      counter += 1;
+      newName = `${NEW_FOLDER_PREFIX} ${countOfFolders + counter}`
+    }
     const newFolder: FileType = {
-      name: `${NEW_FOLDER_PREFIX} ${counter + 1}`,
+      name: newName,
       parent: currentFolder,
       isFolder: true,
       isEditingName: true,
@@ -50,9 +57,16 @@ const App = () => {
    * Name is set to "New File <count of existing files +1>" and isEditingName is set to true
    */
   const addNewFile = () => {
-    const counter = files.filter(file => !file.isFolder).length
+    const countOfFiles = files.filter(file => !file.isFolder).length
+    let counter = 1;
+    let newName = `${NEW_FILE_PREFIX} ${countOfFiles + counter}`
+    const nameAlreadyExist = files.filter(f => !f.isFolder && f.name === newName).length > 0;
+    if(nameAlreadyExist) {
+      counter += 1;
+      newName = `${NEW_FILE_PREFIX} ${countOfFiles + counter}`
+    }
     const newFile: FileType = {
-      name: `${NEW_FILE_PREFIX} ${counter + 1}`,
+      name: newName,
       parent: currentFolder,
       isFolder: false,
       isEditingName: true,

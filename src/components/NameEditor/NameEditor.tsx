@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { RenameWarning } from '..';
 import { FileType } from '../../rootFiles';
 
 const ENTER_KEY_NAME = 'Enter';
