@@ -4,9 +4,9 @@ import { Modal } from '..';
 import closeIcon from '../../icons/delete.svg';
 import { FileType } from '../../rootFiles';
 
-interface DeleteProps {
+interface RenameProps {
   file: FileType
-  deleteFile: (file: FileType) => void
+  newName: string
   onClose: () => void
 }
 
@@ -41,27 +41,22 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const DeleteConfirmation = ({ file, deleteFile, onClose }: DeleteProps) => {
-  const deleteFileHandler = () => {
-    deleteFile(file);
-    onClose()
-  }
+const RenameWarning = ({ file, newName, onClose }: RenameProps) => {
   return (
     <Modal onClose={onClose}>
       <Header>
-        <strong>Delete {`${file.isFolder? 'Folder': 'File'}?`}</strong>
+        <strong>Rename {`${file.isFolder? 'Folder': 'File'}?`}</strong>
         <img src={closeIcon} alt="delete" onClick={onClose}/>
       </Header>
       <Message>
-        {`Are you sure you want to delete ${file.name}?`}
+      {`A ${file.isFolder? 'folder': 'file'}`} {`already exists with name ${newName}. Please choose a different name.`}
       </Message>
       <ActionBar>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button primary onClick={deleteFileHandler}>Delete</Button>
+        <Button primary onClick={onClose}>Cancel</Button>
       </ActionBar>
     </Modal>
   )
 }
 
-export default DeleteConfirmation;
+export default RenameWarning;
 

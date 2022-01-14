@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { RenameWarning } from '..';
 import { FileType } from '../../rootFiles';
 
 const ENTER_KEY_NAME = 'Enter';
@@ -11,7 +12,7 @@ const Input = styled.input`
 
 type NameEditorProps = {
   file: FileType,
-  updateName: (file: FileType, newName: string) => void
+  updateName: (file: FileType, newName: string, editConfirm: boolean) => boolean
 }
 
 const NameEditor = ({ file, updateName }: NameEditorProps) => {
@@ -19,21 +20,21 @@ const NameEditor = ({ file, updateName }: NameEditorProps) => {
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if(event.key === ENTER_KEY_NAME) {
-      updateName(file, name)
+      updateName(file, name, true);
     }
     if(event.key === ESC_KEY_NAME) {
-      updateName(file, file.name)
+      updateName(file, file.name, false);
     }
   };
 
   return (
-      <Input  autoFocus 
-              type="text" 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              onBlur={() => updateName(file, name)}
-              onFocus={(e) => e.target.select()}
-              onKeyUp={handleKeyPress}/>
+    <Input  autoFocus 
+            type="text" 
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onBlur={() => updateName(file, name, true)}
+            onFocus={(e) => e.target.select()}
+            onKeyUp={handleKeyPress}/>
   )
 }
 

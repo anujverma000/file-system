@@ -7,7 +7,7 @@ export interface FileBrowserProps {
   files: Array<FileType>
   openFolder: (file: FileType) => void
   deleteFile: (file: FileType) => void
-  updateFileName: (file: FileType, newName: string) => void
+  updateFileName: (file: FileType, newName: string, editConfirm: boolean) => boolean
   setFileNameEditMode: (file: FileType) => void
 }
 

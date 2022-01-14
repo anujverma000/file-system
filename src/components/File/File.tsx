@@ -8,7 +8,7 @@ import { FileType } from '../../rootFiles';
 export interface FileProps {
   file: FileType
   deleteFile: (file: FileType) => void
-  updateFileName: (file: FileType, newName: string) => void
+  updateFileName: (file: FileType, newName: string, editConfirm: boolean) => boolean
   setFileNameEditMode: (file: FileType) => void
 }
 
