@@ -39,27 +39,19 @@ const FileContainer = styled.div`
   }
 `;
 
-const Name = styled.div`
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-  height: 21px;
-`;
-
-
 const File = ({file, deleteFile, updateFileName, setFileNameEditMode} : FileProps) => {
   const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState<boolean>(false)
   const toggleDeleteConfirmation = () => setDeleteConfirmationVisible(!deleteConfirmationVisible)
 
   return (
-    <FileContainer>
-      <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
+    <>
+      <FileContainer>
+        <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
+        <img src={icon} alt="file" />
+        <NameEditor file={file} updateName={updateFileName} setEditMode={setFileNameEditMode}/>
+      </FileContainer>
       {deleteConfirmationVisible && <DeleteConfirmation file={file} deleteFile={deleteFile} onClose={toggleDeleteConfirmation} />}
-      <img src={icon} alt="file" />
-      {file.isEditingName ? <NameEditor file={file} updateName={updateFileName}/> : <Name onClick={() => setFileNameEditMode(file)}>{file.name}</Name>}
-    </FileContainer>
+    </>
   )
 }
 

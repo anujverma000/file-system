@@ -43,7 +43,7 @@ const Button = styled.button`
 
 const RenameWarning = ({ file, newName, onClose }: RenameProps) => {
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} onSuccess={onClose}>
       <Header>
         <strong>Rename {`${file.isFolder? 'Folder': 'File'}?`}</strong>
         <img src={closeIcon} alt="delete" onClick={onClose}/>

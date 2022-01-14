@@ -39,26 +39,20 @@ const FolderContainer = styled.div`
       }
   }
 `;
-const Name = styled.div`
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-  height: 21px;
-`;
 
 const Folder = ({file, openFolder, deleteFile, updateFileName, setFileNameEditMode} : FolderProps) => {
   const [deleteConfirmationVisible, setDeleteConfirmationVisible] = useState<boolean>(false)
   const toggleDeleteConfirmation = () => setDeleteConfirmationVisible(!deleteConfirmationVisible)
 
   return (
-    <FolderContainer>
-      <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
-      {deleteConfirmationVisible && <DeleteConfirmation file={file} deleteFile={deleteFile} onClose={toggleDeleteConfirmation} />}
-      <img src={icon} alt="folder" onClick={() => openFolder(file)}/>
-      {file.isEditingName ? <NameEditor file={file} updateName={updateFileName}/> : <Name onClick={() => setFileNameEditMode(file)}>{file.name}</Name>}
-    </FolderContainer>
+    <>
+      <FolderContainer>
+        <DeleteIcon src={deleteIcon} alt="delete" onClick={toggleDeleteConfirmation}/>
+        {deleteConfirmationVisible && <DeleteConfirmation file={file} deleteFile={deleteFile} onClose={toggleDeleteConfirmation} />}
+        <img src={icon} alt="folder" onClick={() => openFolder(file)}/>
+        <NameEditor file={file} updateName={updateFileName} setEditMode={setFileNameEditMode}/>
+      </FolderContainer>
+    </>
   )
 }
 

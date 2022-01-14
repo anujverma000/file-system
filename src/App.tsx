@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import { FileBrowser, Header, RenameWarning, Status } from './components';
+import { FileBrowser, Header, Status } from './components';
 import { FILES, FileType, RootFolder } from './rootFiles';
-
 
 const NEW_FOLDER_PREFIX = 'New Folder';
 const NEW_FILE_PREFIX = 'New File';
@@ -21,9 +20,6 @@ const App = () => {
   const [allFiles, setAllFiles] = useState<Array<FileType>>(FILES);
   const [files, setFiles] = useState<Array<FileType>>([]);
   const [currentFolder, setCurrentFolder] = useState(RootFolder);
-  const [warningVisible, setWarningVisible] = useState(false);
-  const [newRename, setNewRename] = useState<string>('');
-  const [currentRenameFile, setCurrentRenameFile] = useState<FileType>();
 
   useEffect(() => {
     setFiles(allFiles.filter(file => file.parent === currentFolder))
@@ -104,9 +100,7 @@ const App = () => {
       setAllFiles(newFiles);
 
       if(editConfirm && newName !== file.name){
-        setCurrentRenameFile(file);
-        setNewRename(newName);
-        setWarningVisible(true);
+        return false;
       }
     }
     else {
@@ -136,23 +130,20 @@ const App = () => {
   }
 
   return (
-    <>
-      <Main>
-        <Header currentFolder={currentFolder} 
-                goBack={setCurrentFolder} 
-                addNewFolder={addNewFolder} 
-                addNewFile={addNewFile} />
+    <Main>
+      <Header currentFolder={currentFolder} 
+              goBack={setCurrentFolder} 
+              addNewFolder={addNewFolder} 
+              addNewFile={addNewFile} />
 
-        <FileBrowser  files={files} 
-                      openFolder={setCurrentFolder} 
-                      deleteFile={deleteFile} 
-                      updateFileName={updateFileName} 
-                      setFileNameEditMode={setFileNameEditMode} />
+      <FileBrowser  files={files} 
+                    openFolder={setCurrentFolder} 
+                    deleteFile={deleteFile} 
+                    updateFileName={updateFileName} 
+                    setFileNameEditMode={setFileNameEditMode} />
 
-        <Status files={files} />
-      </Main>
-      { warningVisible && currentRenameFile && <RenameWarning file={currentRenameFile} newName={ newRename } onClose={() => setWarningVisible(false)} />}
-    </>
+      <Status files={files} />
+    </Main>
   );
 }
 

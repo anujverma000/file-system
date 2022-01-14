@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components';
+
+const ENTER_KEY_NAME = 'Enter';
+const ESC_KEY_NAME = 'Escape';
 
 interface ModalProps {
   children: React.ReactNode
   onClose: () => void
+  onSuccess: () => void
 }
 
 const Backdrop = styled.div`
@@ -34,9 +38,26 @@ const Body = styled.div`
   z-index: 2;
 `;
 
-const Modal = ({ onClose, children }: ModalProps) => {
+const Modal = ({ children, onClose, onSuccess }: ModalProps) => {
   const [visible, setVisile] = useState(true)
   
+  const handleKeyPress = useCallback((event) => {
+    if(event.key === ENTER_KEY_NAME) {
+      onSuccess();
+    }
+    if(event.key === ESC_KEY_NAME) {
+      setVisile(false);
+      onClose();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keyup', handleKeyPress);
+    return () => {
+      document.removeEventListener('keyup', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   if (!visible) return null
 
   return (

@@ -47,7 +47,7 @@ const DeleteConfirmation = ({ file, deleteFile, onClose }: DeleteProps) => {
     onClose()
   }
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} onSuccess={deleteFileHandler}>
       <Header>
         <strong>Delete {`${file.isFolder? 'Folder': 'File'}?`}</strong>
         <img src={closeIcon} alt="delete" onClick={onClose}/>
