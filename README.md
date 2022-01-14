@@ -72,7 +72,7 @@ To get a local copy up and running follow these simple steps.
 ```sh
 git clone https://github.com/anujverma000/file-system.git
 ```
-2. Install NPM packages
+2. Install dependencies
 ```sh
 yarn
 ```
