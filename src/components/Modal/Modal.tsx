@@ -49,7 +49,7 @@ const Modal = ({ children, onClose, onSuccess }: ModalProps) => {
       setVisile(false);
       onClose();
     }
-  }, []);
+  }, [onSuccess, onClose]);
 
   useEffect(() => {
     document.addEventListener('keyup', handleKeyPress);
